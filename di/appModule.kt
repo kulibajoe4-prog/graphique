@@ -39,12 +39,14 @@ import org.babetech.borastock.domain.usecase.UpdateStockEntryUseCase
 import org.babetech.borastock.domain.usecase.UpdateStockExitUseCase
 import org.babetech.borastock.domain.usecase.UpdateStockItemUseCase
 import org.babetech.borastock.domain.usecase.UpdateSupplierUseCase
+import org.babetech.borastock.domain.usecase.GetChartDataUseCase
 import org.babetech.borastock.ui.screens.auth.viewmodel.LoginViewModel
 import org.babetech.borastock.ui.screens.screennavigation.AccueilViewModel
 import org.babetech.borastock.ui.screens.screennavigation.Entries.EntriesViewModel
 import org.babetech.borastock.ui.screens.screennavigation.StockViewModel
 import org.babetech.borastock.ui.screens.screennavigation.exits.ExitsViewModel
 import org.babetech.borastock.ui.screens.screennavigation.suppliers.SuppliersViewModel
+import org.babetech.borastock.ui.screens.dashboard.viewmodel.GraphicsViewModel
 import org.babetech.borastock.ui.screens.setup.viewmodel.CompanySetupViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -106,6 +108,7 @@ val appModule = module {
     // Use Cases – Statistics
     factory { GetStockStatisticsUseCase(repository = get<StockRepository>()) }
     factory { GetRecentMovementsUseCase(repository = get<StockRepository>()) }
+    factory { GetChartDataUseCase(repository = get<StockRepository>()) }
 
     // ViewModels
     viewModelOf(::LoginViewModel)
@@ -114,13 +117,13 @@ val appModule = module {
     viewModelOf(::ExitsViewModel)
     viewModelOf(::StockViewModel)
     viewModelOf(::AccueilViewModel)
+    viewModelOf(::GraphicsViewModel)
 
 
 
     viewModelOf(::SuppliersViewModel)
 
     factory { GetStockMovementsUseCase(get()) }
-    factory { GetStockStatisticsUseCase(get()) }
     factory { GetSuppliersDistributionUseCase(get()) }
 
 
